@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>无标题文档</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$(".click").click(function() {
+					$(".tip").fadeIn(200);
+				});
+				$(".tiptop a").click(function() {
+					$(".tip").fadeOut(200);
+				});
+				$(".sure").click(function() {
+					$(".tip").fadeOut(100);
+				});
+				$(".cancel").click(function() {
+					$(".tip").fadeOut(100);
+				});
+			});
+		</script>
+		<script>
+            $(function () {
+              findByid();
+            })
+			function findByid() {
+
+
+
+                $.ajax({
+                    type:"get",
+                    url:"expenseController",
+                    data:"method=findByNextAuditor",
+                    dataType:"json",
+                    success:function (datas) {
+                        console.log(datas)
+                        for(var i in datas){
+                            console.log(datas[i].expid)
+                            $("#expensebody").append('<tr>\n' +
+                                '\t\t\t\t\t\t<td>\n' +
+                                '\t\t\t\t\t\t\t<input name="" type="checkbox" value="" />\n' +
+                                '\t\t\t\t\t\t</td>\n' +
+                                '\t\t\t\t\t\t<td>'+datas[i].realname+'</td>\n' +
+                                '\t\t\t\t\t\t<td>'+datas[i].totalamount+'</td>\n' +
+                                '\t\t\t\t\t\t<td>'+datas[i].exptime+'</td>\n' +
+                                '\t\t\t\t\t\t<td>'+datas[i].expdesc+'</td>\n' +
+                                '\t\t\t\t\t\t<td><a href="expenseDetail.jsp?expid='+datas[i].expid+' "class="tablelink"> 查看具体报销项</a></td>\n' +
+                                '\t\t\t\t\t\t<td> <a href="expenseImg.html？" class="tablelink">查看所附图片</a></td>\n' +
+                                '<td><a href="javascript:open(\'audit.jsp?expid='+datas[i].expid+'\',\'\',\'width=500,height=230,left=300,top=300,location=0,scrollbars=0,resizable=0\')" class="tablelink">审核</a> \n' +
+                                '\t<a href="auditingController?method=auditHistory&expid='+datas[i].expid+'" class="tablelink">查看审核记录</a></td> ' +
+                                '\t\t\t\t\t</tr>');
+                        }
+                    }
+                })
+            }
+
+            // function toDetail(id) {
+				// window.location.href = "expenseDetail.jsp?expid="+id;
+            // }
+		</script>
+
+	</head>
+
+	<body>
+
+		<div class="place">
+			<span>位置：</span>
+			<ul class="placeul">
+				<li><a href="#">报销管理</a></li>
+				<li><a href="#">待审报销</a></li>
+			</ul>
+		</div>
+
+		<div class="rightinfo">
+
+			<div class="formtitle1"><span>待审报销</span></div>
+
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th>
+							<input name="" type="checkbox" value="" checked="checked" />
+						</th>
+						<th>报销人<i class="sort"><img src="images/px.gif" /></i></th>
+						<th>报销总额</th>
+						<th>报销时间</th>
+						<th>总备注信息</th>
+						<th>查看具体报销项</th>
+						<th>查看所附图片</th>
+						<th>审核</th>
+					</tr>
+				</thead>
+				<tbody id="expensebody">
+
+					<!--<tr>-->
+						<!--<td>-->
+							<!--<input name="" type="checkbox" value="" />-->
+						<!--</td>-->
+						<!--<td>任河</td>-->
+						<!--<td>8000</td>-->
+						<!--<td>2018-4-25</td>-->
+						<!--<td>4月份水费支出</td>-->
+						<!--<td><a href="expenseDetail.jsp" class="tablelink"> 查看具体报销项</a></td>-->
+						<!--<td> <a href="expenseImg.html" class="tablelink">查看所附图片</a></td>-->
+						<!--<td><a href="#" class="tablelink">审核</a> <a href="#" class="tablelink">查看审核记录</a></td>-->
+					<!--</tr>-->
+				</tbody>
+			</table>
+
+		</div>
+
+		<script type="text/javascript">
+			$('.tablelist tbody tr:odd').addClass('odd');
+		</script>
+
+	</body>
+
+</html>

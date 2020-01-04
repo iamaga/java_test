@@ -1,0 +1,3 @@
+com\bjsxt\jedis\dao\impl\JedisSingDaoleImpl.class
+com\bjsxt\jedis\dao\impl\JedisClusterDaoleImpl.class
+com\bjsxt\jedis\dao\JedisDao.class

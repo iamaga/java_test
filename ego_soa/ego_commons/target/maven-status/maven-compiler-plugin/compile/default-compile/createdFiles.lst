@@ -1,0 +1,8 @@
+com\bjsxt\common\pojo\JsonUtils.class
+com\bjsxt\common\pojo\IDUtils.class
+com\bjsxt\common\pojo\FastDFSClient.class
+com\bjsxt\common\pojo\EasyUIDataGridResult.class
+com\bjsxt\common\pojo\ItemCatResult.class
+com\bjsxt\common\pojo\PictureResult.class
+com\bjsxt\common\pojo\DataResult.class
+com\bjsxt\common\pojo\EasyUITreeResult.class

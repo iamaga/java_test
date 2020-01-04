@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  style="height: 100%">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link href="css/select.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="js/jquery.js"></script>
+
+	<script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
+	<script type="text/javascript" src="js/select-ui.min.js"></script>
+	<script type="text/javascript" src="editor/kindeditor.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function(e) {
+            $(".select1").uedSelect({
+                width : 200
+            });
+
+        });
+        </script>
+	<script>
+		$(function () {
+			getData();
+        })
+		function getData() {
+			$.ajax({
+				type:'get',
+				url:'incomeController?method=findDatasBydate',
+				data:$('form').serialize(),
+				dataType:"json",
+				success:function (datas) {
+				    console.log(datas)
+					showDate(datas)
+                }
+
+			})
+        }
+        function showDate(datas) {
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            option = {
+                xAxis: {
+                    type: 'category',
+                    data: datas[0]
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: datas[1],
+                    type: 'bar'
+                }]
+            };
+            ;
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+        }
+	</script>
+</head>
+
+	   <body style="height: 100%; margin: 0">
+	   <form>
+	   <ul class="prosearch">
+		   <li>
+
+			   <i>起始登记时间</i>
+			   <a>
+				   <input name="startDate" type="text" class="scinput" />
+			   </a>
+			   <i>结束登记时间</i>
+			   <a>
+				   <input name="endDate" type="text" class="scinput" />
+			   </a>
+			   <a>
+				   <input name="" onclick="getData()" type="button" class="sure" value="查询" />
+			   </a>
+		   </li>
+	   </ul>
+	   </form>
+	   <div >
+	   	<h1 align="center">公司收入统计柱状图</h1>
+	   </div>	
+       <div id="container" style="height: 90%"></div>
+      	<script src="js/echarts.min.js"></script>
+       <script type="text/javascript">
+			var dom = document.getElementById("container");
+			var myChart = echarts.init(dom);
+			var app = {};
+			option = null;
+			option = {
+			    xAxis: {
+			        type: 'category',
+			        data: ['人员外包', '项目开发', '报名费', '学费', '认证考试', '线上授课', '其他']
+			    },
+			    yAxis: {
+			        type: 'value'
+			    },
+			    series: [{
+			        data: [120, 200, 150, 80, 70, 110, 130],
+			        type: 'bar'
+			    }]
+			};
+			;
+			if (option && typeof option === "object") {
+			    myChart.setOption(option, true);
+			}
+	   </script>
+   </body>
+</html>

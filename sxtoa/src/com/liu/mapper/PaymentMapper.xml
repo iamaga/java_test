@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.PaymentMapper">
+    <insert id="addPayment">
+        insert into payment values(default,#{payempid},#{amount},#{paytime},#{expid},#{empid})
+    </insert>
+    <select id="findPaymentByCondition" resultType="payment">
+        SELECT pa.*,em.realname realnamea,em2.realname realnameb,ex.expdesc from payment pa
+        left join employee em on em.empid = pa.empid
+        left join employee em2 on em2.empid = pa.payempid
+        left join expense ex on pa.expid = ex.expid
+        where ex.status='5'
+        <if test="param1!=null and param1!=''">
+            and paytime &gt;=#{param1}
+        </if>
+        <if test="param2!=null and param2!=''">
+            and paytime &lt;=#{param2}
+        </if>
+        <if test="param3!=null and param3!=''">
+            <bind name="em" value="'%'+param3+'%'"></bind>
+            and em2.realname like #{em}
+        </if>
+    </select>
+    <select id="findPaymentByDate" resultType="nV">
+        select type name,SUM(ei.amount)value from expenseitem ei
+        left join expense  ex
+        on ei.expid = ex.expid
+        left join payment pa
+        on ei.expid = pa.expid
+        where ex.status = 5
+        <if test="param1!=null and param1!=''">
+            and paytime &gt;=#{param1}
+        </if>
+        <if test="param2!=null and param2!=''">
+            and paytime &lt;=#{param2}
+        </if>
+        group by type
+    </select>
+
+</mapper>

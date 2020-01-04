@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.AuditingMapper">
+    <insert id="addAudit" >
+        insert into auditing VALUES (DEFAULT,#{expid},#{empid},#{result},#{auditdesc},#{time})
+    </insert>
+    <select id="findAuditByExpid" resultType="auditing">
+        select a.*,realname from auditing a
+        left join employee e
+        on a.empid = e.empid
+        where expid=#{expid}
+    </select>
+    <select id="findMyAuditByEmpid" resultType="auditing">
+        select a.*,realname,totalamount,exptime,time,expdesc,lastResult from auditing a
+        left join expense ex
+        ON ex.expid = a.expid
+        left join employee em
+        on a.empid = em.empid
+        where a.empid=#{empid}
+    </select>
+</mapper>

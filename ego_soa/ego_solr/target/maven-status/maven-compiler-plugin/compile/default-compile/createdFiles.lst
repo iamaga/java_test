@@ -1,0 +1,6 @@
+com\bjsxt\solr\service\SolrService.class
+com\bjsxt\solr\web\controller\SearchController.class
+com\bjsxt\solr\pojo\ItemSearch.class
+com\bjsxt\solr\dao\impl\SolrDaoImpl.class
+com\bjsxt\solr\dao\SolrDao.class
+com\bjsxt\solr\service\impl\SolrServiceImpl.class

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.DeptMapper">
+    <insert id="insert">
+        insert into dept values (#{deptno},#{deptname},#{location})
+    </insert>
+    <select id="findAll" resultType="dept">
+        select * from dept
+    </select>
+    <delete id="deleteByDeptno">
+        delete from dept where deptno=#{deptno}
+    </delete>
+    <select id="findBydeptno" resultType="dept">
+        select * from dept where deptno=#{deptno}
+    </select>
+    <update id="updateDept">
+        update dept set deptname=#{deptname},location=#{location} where deptno = #{deptno}
+    </update>
+</mapper>

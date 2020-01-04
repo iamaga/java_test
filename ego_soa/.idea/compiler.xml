@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ego_item" />
+        <module name="ego_pojo" />
+        <module name="ego_rpc_api_impl" />
+        <module name="ego_protal" />
+        <module name="ego_rpc_api" />
+        <module name="ego_mapper" />
+        <module name="ego_solr" />
+        <module name="ego_commons" />
+        <module name="ego_redis" />
+        <module name="ego_managerment" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ego_portal" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

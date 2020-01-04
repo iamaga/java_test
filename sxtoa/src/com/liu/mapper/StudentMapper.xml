@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.StudentMapper">
+    <select id="selectByPage" resultType="student">
+        select * from student
+        <where>
+            <if test="param3!=null and param3!=''">
+            <bind name="em" value="'%'+param3+'%'"/>
+            and stuname like #{em}
+        </if>
+            <if test="param4!=null and param4!=''">
+                and stuage &gt;= #{param4}
+            </if>
+        </where>
+        limit #{param1},#{param2}
+    </select>
+    <select id="getTotalSize" resultType="int">
+        select count(*) from student
+        <where>
+            <if test="param1!=null and param1!=''">
+                <bind name="em" value="'%'+param1+'%'"/>
+                and stuname like #{em}
+            </if>
+            <if test="param2!=null and param2!=''">
+                and stuage &gt;= #{param2}
+            </if>
+        </where>
+    </select>
+    <insert id="addStudent">
+        insert into student VALUES (DEFAULT,#{stuname},#{stuage},#{stugender},#{filename},#{filetype})
+    </insert>
+</mapper>

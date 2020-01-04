@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.ExpenseMapper">
+    <insert id="addExpense" useGeneratedKeys="true" keyProperty="expid">
+        insert into expense values(DEFAULT,#{empid},#{totalamount},#{exptime},
+        #{expdesc},#{nextauditor},#{lastResult},#{status})
+    </insert>
+    <select id="findByNextauditor" resultType="expense">
+      select ex.*,realname from expense ex
+      left join employee em
+      on ex.empid = em.empid
+      where nextauditor = #{nextauditor} and ex.status = 0
+    </select>
+    <select id="findExpenseByExpid" resultType="expense">
+        select * from expense where expid=#{expid}
+    </select>
+    <update id="updateExpense">
+        update expense set nextauditor=#{nextauditor},lastresult=#{lastResult},status=#{status} WHERE expid = #{expid}
+    </update>
+    <select id="findAllExpense" resultType="expense">
+        select * from expense WHERE empid = #{empid}
+    </select>
+</mapper>

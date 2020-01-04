@@ -1,0 +1,6 @@
+com\bjsxt\provider\service\IndexContentADServiceAPI.class
+com\bjsxt\provider\service\ItemCatServiceAPI.class
+com\bjsxt\provider\service\ItemParamServiceAPI.class
+com\bjsxt\provider\service\ItemService.class
+com\bjsxt\provider\service\ContentCategoryServiceAPI.class
+com\bjsxt\provider\service\ContentServiceAPI.class

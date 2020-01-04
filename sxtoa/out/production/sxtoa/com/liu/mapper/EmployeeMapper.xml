@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.mapper.EmployeeMapper">
+    <select id="findAllEmp" resultType="employee">
+        select e.*,deptname,pname from employee e
+        left JOIN dept d
+        on e.deptno=d.deptno
+        left join position p
+        on e.posid=p.posid
+    </select>
+    <insert id="addEmployee">
+        insert into employee values (#{empid},#{password}, #{deptno},#{posid}, #{mgrid},#{realname},
+        #{sex},#{birthdate},#{hiredate},#{leavedate}, #{onduty}, #{emptype}, #{phone}, #{qq}, #{emercontactperson}, #{idcard})
+    </insert>
+    <delete id="deleteEmpById">
+        delete from employee where empid = #{empid}
+    </delete>
+    <select id="findeByEmpId" resultType="employee">
+        select * from employee where empid=#{empid}
+    </select>
+
+    <select id="selectMgrid" resultType="employee">
+        select * from employee where posid = 2
+    </select>
+
+    <update id="updateEmp">
+        update employee set
+        password = #{password},
+         posid = #{posid},
+        mgrid =  #{mgrid},
+        realname = #{realname},
+        sex = #{sex},
+        birthdate = #{birthdate},
+        hiredate = #{hiredate},
+        leavedate = #{leavedate},
+         onduty = #{onduty},
+        emptype = #{emptype},
+        phone = #{phone},
+        qq = #{qq},
+        emercontactperson= #{emercontactperson},
+        idcard = #{idcard}
+        where empid = #{empid}
+    </update>
+    <update id="updateEmp2">
+        update employee
+        <set>
+            <if test="deptno != null and deptno != 0 ">
+                deptno =#{deptno},
+            </if>
+            <if test="posid != null and posid != 0 ">
+                posid =#{posid},
+            </if>
+            <if test="mgrid != null and mgrid != '' ">
+                mgrid =#{mgrid},
+            </if>
+            <if test="realname != null and realname != '' ">
+                realname =#{realname},
+            </if>
+            <if test="sex != null and sex != '' ">
+                sex =#{sex},
+            </if>
+            <if test="birthdate != null  ">
+                birthdate =#{birthdate},
+            </if>
+            <if test="hiredate != null  ">
+                hiredate =#{hiredate},
+            </if>
+            <if test="hiredate != null  ">
+                hiredate =#{hiredate},
+            </if>
+            <if test="leavedate != null  ">
+                leaveDate =#{leavedate},
+            </if>
+            <if test="onduty != null  ">
+                onduty =#{onduty},
+            </if>
+            <if test="emptype != null and emptype!=0 ">
+                emptype =#{emptype},
+            </if>
+            <if test="phone != null  ">
+                phone =#{phone},
+            </if>
+            <if test="qq != null  ">
+                qq =#{qq},
+            </if>
+            <if test="emercontactperson != null  ">
+                emercontactPerson =#{emercontactperson},
+            </if>
+            <if test="idcard != null  ">
+                idcard =#{idcard},
+            </if>
+
+        </set>
+        where empid=#{empid}
+
+    </update>
+
+    <select id="findBymore" resultType="employee">
+        select * from employee e
+        left join dept d
+        on  e.deptno=d.deptno
+        left join position p
+        on e.posid=p.posid
+        <where>
+            <if test="param1 != null and param1!=''" >
+                <bind name="eid" value="'%'+param1+'%'"/>
+                and empid like #{eid}
+            </if>
+            <if test="param2!=null and param2 != ''">
+                and d.deptno = #{param2}
+            </if>
+            <if test="param3!=null and param3 !=''">
+                and onduty =#{param3}
+            </if>
+            <if test="param4 != null and param4 != ''">
+                and hiredate = #{param4}
+            </if>
+        </where>
+    </select>
+    <select id="findEmpByEmpidAndPwd" resultType="employee">
+        select * from employee where empid = #{param1} and password = #{param2}
+    </select>
+    <select id="findAllMgr" resultType="employee">
+        select * from employee where emptype = 2
+    </select>
+    <update id="updateEmpByInform">
+        update employee set qq=#{param1},phone=#{param2},emercontactperson=#{param3} where empid=#{param4}
+    </update>
+    <update id="updatepassword">
+        update employee set password=#{param1} where password=#{param2} and empid=#{param3}
+    </update>
+</mapper>

@@ -1,0 +1,11 @@
+com\bjsxt\mapper\TbContentMapper.class
+com\bjsxt\mapper\TbItemParamMapper.class
+com\bjsxt\mapper\TbOrderItemMapper.class
+com\bjsxt\mapper\TbOrderShippingMapper.class
+com\bjsxt\mapper\TbUserMapper.class
+com\bjsxt\mapper\TbItemMapper.class
+com\bjsxt\mapper\TbOrderMapper.class
+com\bjsxt\mapper\TbItemDescMapper.class
+com\bjsxt\mapper\TbItemCatMapper.class
+com\bjsxt\mapper\TbContentCategoryMapper.class
+com\bjsxt\mapper\TbItemParamItemMapper.class
